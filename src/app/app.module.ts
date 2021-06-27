@@ -22,6 +22,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {MatInputModule} from '@angular/material/input';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    // NgbModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule
 

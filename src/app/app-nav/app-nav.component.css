@@ -15,3 +15,24 @@
   top: 0;
   z-index: 1;
 }
+
+.body{
+  background: #383a3f;
+}
+
+.container-fluid{
+  padding: 50px 100px;
+  
+}
+.card{
+  border-radius: 5px;
+  padding: 10px 20px;
+  
+}
+.heading{
+  font-size: 20px;
+}
+
+.sub-heading{
+  font-size: 15px;
+}
