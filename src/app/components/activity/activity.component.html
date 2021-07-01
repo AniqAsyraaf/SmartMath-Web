@@ -1,4 +1,4 @@
-<div class="container-fluid" >
+<div *ngIf="!isSignedIn" class="container-fluid" >
     <div class="row" *ngIf="activityList.length">
         
             <div class="col-md-3" *ngFor="let activity of activityList">
@@ -10,6 +10,5 @@
                     <div class="sub-heading">{{activity.date}}</div>
                 </div>
             </div>
-        
     </div>
 </div>

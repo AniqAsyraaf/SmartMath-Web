@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {AngularFireAuth} from '@angular/fire/auth'
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireBaseService {
-
+ 
+  isLoggedIn = false;
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    public auth: AngularFireAuth
   ) { }
 
   getActivities(){
@@ -27,7 +31,24 @@ export class FireBaseService {
     return this.firestore.doc('activity/' + activityID).delete();
   }
 
+  async signIn(email: string, password: string){
+    this.auth.signInWithEmailAndPassword(email, password)
+    .then(res =>{this.isLoggedIn = true
+      localStorage.setItem('users',JSON.stringify(res.user))
+    }) 
+  }
 
+  signUp(email: string, password: string){
+    this.auth.createUserWithEmailAndPassword(email, password)
+    .then(res =>{this.isLoggedIn = true
+      localStorage.setItem('users',JSON.stringify(res.user))
+    }) 
+  }
+
+  logout(){
+    this.auth.signOut()
+    localStorage.removeItem('users')
+  }
 
 }
 
@@ -48,5 +69,12 @@ export interface IActivities{
   title: string;
   tutorialdate: string;
   uid: string;
-  
+}
+
+export interface IUsers{
+  id?: string;
+  login: string;
+  name: string;
+  password: string;
+  role: string;
 }

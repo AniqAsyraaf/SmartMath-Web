@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ActivityComponent implements OnInit {
 
-  
+  isSignedIn = false; 
  // private form: FormGroup;
 
  public activityList: IActivities[] = [];
@@ -34,14 +34,9 @@ export class ActivityComponent implements OnInit {
        return{
          ...activity.payload.doc.data() as {},
          id: activity.payload.doc.id
-       }as IActivities;
+       } as IActivities;
      });
    });
  }
-
-//  download(){
-//   // Create Book logic
-//   this.router.navigate(['{{activity.file}}']);
-// }
-
+ 
 }
