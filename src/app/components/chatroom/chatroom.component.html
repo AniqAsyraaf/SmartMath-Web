@@ -1,6 +1,17 @@
-<p>chatroom works!</p>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>document</title>
+    </head>
+</html>
+
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+
+<!-- add firebase database -->
+<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-database.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -24,7 +35,7 @@
   firebase.analytics();
 </script>
 
-<script>
+<!-- <script>
     function sendMessage() {
         // get message
         var message = document.getElementById("message").value;
@@ -70,7 +81,7 @@
             document.getElementById("message-" + snapshot.key).innerHTML = "This message has been removed";
         });
     }
-</script>
+</script> -->
 
 <!-- create a form to send message -->
 <form onsubmit="return sendMessage();">
@@ -80,4 +91,4 @@
 </form>
 
 <!-- create a list -->
-<ul id="messages"></ul>
+<!-- <ul id="messages"></ul> -->
