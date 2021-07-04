@@ -1,1 +1,102 @@
-<p>register works!</p>
+<body class="bg-light">
+    <div class="row mx-auto">
+        <div class="col"></div>
+        <div class="col-md-5">
+            <h2 class="text-center"><b><br>Register SmartMath</b></h2>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form (ngSubmit)="onRegister()">
+                        <div class="form-group">
+                            <label><b>Name:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter name" [(ngModel)]="user.name"
+                                name="name">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Email:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter email" [(ngModel)]="user.login"
+                                name="login">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Password:</b></label>
+                            <input type="password" class="form-control" placeholder="Enter password"
+                                [(ngModel)]="user.password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Confirm Password:</b></label>
+                            <input type="password" class="form-control" placeholder="Confirm password"
+                                [(ngModel)]="user.password" name="confirmPassword">
+                        </div>
+                        <!-- <input type="hidden" name="id" [(ngModel)]="user.id" value={{userUID}}>  -->
+                        <!-- <input type="submit" value="Submit" class="btn-success"> -->
+                        <div col><input type="submit" class="btn btn-success" value="Register"> Already has an account?
+                            <a routerLink="/"><button type="button" class="btn btn-primary">Sign
+                                    In</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- <div class="card-body">
+                    <form action="/action_page.php">
+                        <div class="form-group">
+                            <label for="name"><b>Name:</b></label>
+                            <input type="name" class="form-control" id="name" placeholder="Enter name" name="name"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><b>Email:</b></label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><b>Password:</b></label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter password"
+                                name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword"><b>Confirm Password:</b></label>
+                            <input type="confirmPassword" class="form-control" id="confirmPassword"
+                                placeholder="Enter confirm password" name="confirmPassword" required>
+                        </div>
+                        <div col><button type="submit" class="btn btn-success">Register</button> Already has an account?
+                            <a routerLink="login"><button type="button" class="btn btn-primary">Sign
+                                    In</button></a>
+                        </div>
+                    </form>
+                </div> -->
+
+
+            <!-- <div *ngIf="!isSignedIn">
+                <form class="example-form" onclick="">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input name="email" [(ngModel)]="email" type="email" matInput [formControl]="emailFormControl"
+                            placeholder="Ex. pat@example.com">
+                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div class="example-container">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Enter your password</mat-label>
+                            <input name="password" [(ngModel)]="password" matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="example-button-row">
+                        <button mat-raised-button (click)="onSignIn(email,password)" type="submit">Login</button>
+                    </div>
+                </form>
+            </div> -->
+        </div>
+        <div class="col"></div>
+    </div>
+</body>
