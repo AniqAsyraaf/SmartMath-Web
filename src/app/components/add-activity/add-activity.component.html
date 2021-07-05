@@ -1,0 +1,46 @@
+<form (ngSubmit)="onSubmit()" >
+   <div>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" name="title" [(ngModel)]="activity.title">
+        </mat-form-field></td>
+    </div>
+    <div>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" name="description" [(ngModel)]="activity.description">
+        </mat-form-field></td>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select (change)="selectInput($event)" name="category" [(ngModel)]="activity.category">
+                <mat-option value="Tutorial">Tutorial</mat-option>
+                <mat-option value="Submission">Submission</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <td><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Data & Time</mat-label>
+            <input matInput type="datetime-local" name="tutorialdate" [(ngModel)]="activity.tutorialdate">
+        </mat-form-field></td>
+    </div>
+    <div>
+        <td>
+            <mat-label>File</mat-label>
+            <br>
+            <input type="file" name="file" [(ngModel)]="activity.file" (change)="selectFile($event)">
+        </td>
+    </div>
+
+    <input type="hidden" name="date" [(ngModel)]="activity.date" value=todaysDataTime> 
+    
+  
+    <div class="example-button-row">
+        <br><button mat-raised-button color="primary" type="submit" [disabled]="!selectedFiles" >Add</button>
+    </div>
+</form>
+
+
+  <!-- <a href="{{ fileUpload.url }}">asd</a> -->

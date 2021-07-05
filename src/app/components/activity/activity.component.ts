@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FireBaseService, IActivities } from '../../services/fire-base.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-activity',
@@ -11,23 +13,35 @@ import { Router } from '@angular/router';
 })
 export class ActivityComponent implements OnInit {
 
-  isSignedIn = false; 
- // private form: FormGroup;
+ userUID = localStorage.getItem("users")
+ 
+ 
 
- public activityList: IActivities[] = [];
+ private form: FormGroup;
 
- // public activityDetails: IActivities;
+ public activityList: IActivities[];
 
+ public activityDetails: IActivities;
 
+ isSignedIn = false;
+
+ 
  constructor(
    private fb: FormBuilder,
    private modalService: NgbModal,
-   private fireBaseService: FireBaseService
+   private fireBaseService: FireBaseService,
+   private router: Router,
+   public afAuth: AngularFireAuth
  ){}
  ngOnInit(): void{
    this.getActivities();
+   
+   
  }
 
+// getUid() {
+//  return this.afAuth.currentUser;
+// } 
  getActivities(): void{
    this.fireBaseService.getActivities().subscribe((res)=> {
      this.activityList = res.map((activity) => {
@@ -38,5 +52,19 @@ export class ActivityComponent implements OnInit {
      });
    });
  }
- 
+
+
+
+//  update(id: string) {
+//   this.fireBaseService.updateActivities(id);
+//  }
+
+//  delete(id: string) {
+//   this.fireBaseService.deleteActivities(id);
+//  }
+
+ redirect(){
+  this.router.navigate(['/addActivity']);
+ }
+
 }

@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ActivityComponent } from './components/activity/activity.component';
-import { LoginComponent } from './components/login/login.component';
+// import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SubmissionComponent } from './components/submission/submission.component';
@@ -21,9 +21,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import {MatInputModule} from '@angular/material/input';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatInputModule } from '@angular/material/input';
+import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ViewSubmissionComponent } from './components/view-submission/view-submission.component';
+import { ModalComponent, ModalModule } from 'ngb-modal';
+import { AddActivityComponent } from './components/add-activity/add-activity.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -31,11 +36,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     AppNavComponent,
     ActivityComponent,
-    LoginComponent,
     RegisterComponent,
     ProfileComponent,
     SubmissionComponent,
-    ChatroomComponent
+    ChatroomComponent,
+    ViewSubmissionComponent,
+    AddActivityComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,12 +54,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatListModule,
     FormsModule,
+    MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    FormsModule
+    FormsModule,
+    ModalModule,
+    MatSelectModule,
+    AngularFireAuthModule
+    
 
   ],
   providers: [],

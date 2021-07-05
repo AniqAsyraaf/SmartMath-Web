@@ -58,6 +58,11 @@ export class RegisterComponent implements OnInit {
       //   localStorage.setItem('users', JSON.stringify(res.user))
       //   this.user.id = res.user?.uid;
       // });
+      localStorage.setItem('userLogin', this.user.login)
+      localStorage.setItem('userName', this.user.name)
+      localStorage.setItem('userPassword', this.user.password)
+      localStorage.setItem('userRole', this.user.role)
+      
       this.fireBaseService.addUsers(this.user);
       this.user.name = '';
       this.user.login = '';

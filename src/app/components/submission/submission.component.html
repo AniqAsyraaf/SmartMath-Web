@@ -1,1 +1,14 @@
-<p>submission works!</p>
+<div *ngIf="!isSignedIn" class="container-fluid" >
+    <div class="row" *ngIf="submissionList.length">
+        <div class="col-md-3" *ngFor="let submission of submissionList">
+            
+                <div class="heading"><b>Title: </b>{{submission.datesubmit}}</div>
+                <div><b>Description</b></div>
+                <!-- <div class="sub-heading">{{submission.description}}</div>
+                <div class="sub-heading"><button><a href="{{submission.file}}">Download File</a></button></div>
+                <div class="sub-heading">{{submission.date}}</div> -->
+            
+        </div>
+    </div>
+</div>
+

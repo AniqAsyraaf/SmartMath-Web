@@ -1,5 +1,5 @@
-<div *ngIf="!isSignedIn">
-    <form class="example-form" onclick="">
+<div *ngIf="!isSignedIn&&!isSignUp">
+    <form class="example-form" >
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Email</mat-label>
         <input name="email" [(ngModel)]="email" type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
@@ -22,11 +22,54 @@
       </div>
   
       <div class="example-button-row">
-          <button mat-raised-button (click)="onSignIn(email,password)" type="submit">Login</button>
+          <button mat-raised-button class="btn btn-success" (click)="onSignIn(email,password)" type="submit">Login</button>
+          Don't have an account? Sign up now! <button mat-raised-button class="btn btn-primary" (click)="handleSignUp()" type="submit">Register</button>
       </div>
     </form>
   </div>
-  <div *ngIf="isSignedIn">
-    <app-app-nav (isLogout)="handleLogout()"></app-app-nav>
-  </div>
+
+  <body *ngIf="!isSignedIn&&isSignUp" class="bg-light">
+    <div class="row mx-auto">
+        <div class="col"></div>
+        <div class="col-md-5">
+            <h2 class="text-center"><b><br>Register SmartMath</b></h2>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form (ngSubmit)="onRegister()">
+                        <div class="form-group">
+                            <label><b>Name:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter name" [(ngModel)]="user.name"
+                                name="name">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Email:</b></label>
+                            <input type="text" class="form-control" placeholder="Enter email" [(ngModel)]="user.login"
+                                name="login">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Password:</b></label>
+                            <input type="password" class="form-control" placeholder="Enter password"
+                                [(ngModel)]="user.password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label><b>Confirm Password:</b></label>
+                            <input type="password" class="form-control" placeholder="Confirm password"
+                                [(ngModel)]="user.password" name="confirmPassword">
+                        </div>
+                        <!-- <input type="hidden" name="id" [(ngModel)]="user.id" value={{userUID}}>  -->
+                        <!-- <input type="submit" value="Submit" class="btn-success"> -->
+                        <div col><input type="submit"  class="btn btn-success" value="Register"> Already has an account?
+                          <button mat-raised-button class="btn btn-primary" (click)="handleSignIn()" type="submit">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</body>
+
+<div *ngIf="isSignedIn"> 
+  <app-app-nav (isLogout)="handleLogout()"></app-app-nav>
+</div>
   

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Form, FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FireBaseService, IActivities } from './services/fire-base.service';
+import { FireBaseService, IActivities, IUsers } from './services/fire-base.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -24,6 +24,17 @@ export class AppComponent implements OnInit{
   password: string;
   hide = true;
   isSignedIn = false;
+  isSignUp = false;
+  userUID = localStorage.getItem("users")
+
+  user: IUsers = {
+    id: '',
+    login: '',
+    name: '',
+    password: '',
+    role: 'Student',
+  }
+  
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -48,25 +59,47 @@ export class AppComponent implements OnInit{
     this.isSignedIn = true;
     else
     this.isSignedIn = false;
+    
   }
 
   onSignIn(email: string, password: string){
-    this.fireBaseService.signIn(email, password)
+    var userUID = this.fireBaseService.signIn(email, password)
+    console.log(userUID)
     if(this.fireBaseService.isLoggedIn)
     this.isSignedIn =true;
+    
   }
 
-  onSignUp(email: string, password: string){
-    this.fireBaseService.signUp(email, password)
-    if(this.fireBaseService.isLoggedIn)
-    this.isSignedIn =true;
+  onRegister() {
+    if (this.user.name != '' && this.user.login != '' && this.user.password != '') {
+      // this.auth.createUserWithEmailAndPassword(this.user.login, this.user.password)
+      // .then(res => {
+      //   this.isLoggedIn = true
+      //   localStorage.setItem('users', JSON.stringify(res.user))
+      //   this.user.id = res.user?.uid;
+      // });
+      localStorage.setItem('userLogin', this.user.login)
+      localStorage.setItem('userName', this.user.name)
+      localStorage.setItem('userPassword', this.user.password)
+      localStorage.setItem('userRole', this.user.role)
+      
+      this.fireBaseService.addUsers(this.user);
+      this.user.name = '';
+      this.user.login = '';
+      this.user.password = '';
+      //this.user.confirmPassword = '';
+    }
   }
 
   handleLogout(){
-    this.isSignedIn = false
+    this.isSignedIn = false;
   }
-  // logout(){
-  //   this.auth.signOut()
-  //   localStorage.removeItem('users')
-  // }
+  
+  handleSignUp(){
+    this.isSignUp = true;
+  }
+
+  handleSignIn(){
+    this.isSignUp = false;
+  }
 }
