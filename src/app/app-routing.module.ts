@@ -3,6 +3,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivityComponent } from './components/activity/activity.component';
 import { AddActivityComponent } from './components/add-activity/add-activity.component';
+import { AddSubmissionComponent } from './components/add-submission/add-submission.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
 // import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'submission', component:SubmissionComponent},
   {path: 'chatroom', component:ChatroomComponent},
   {path: 'viewSubmission', component:ViewSubmissionComponent},
-  {path: 'addActivity', component:AddActivityComponent}
+  {path: 'addActivity', component:AddActivityComponent},
+  {path: 'addSubmission', component:AddSubmissionComponent}
 ];
 
 @NgModule({

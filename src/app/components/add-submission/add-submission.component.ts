@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FireBaseService, IActivities } from '../../services/fire-base.service';
+import { FireBaseService, IActivities, ISubmissions } from '../../services/fire-base.service';
 import { Router } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -11,14 +11,15 @@ import { FileUpload } from 'src/app/models/file-upload';
 import { DatePipe } from '@angular/common';
 import {formatDate } from '@angular/common';
 
+
 @Component({
-  selector: 'app-add-activity',
-  templateUrl: './add-activity.component.html',
-  styleUrls: ['./add-activity.component.css'],
+  selector: 'app-add-submission',
+  templateUrl: './add-submission.component.html',
+  styleUrls: ['./add-submission.component.css'],
   providers: [DatePipe]
 })
+export class AddSubmissionComponent implements OnInit {
 
-export class AddActivityComponent implements OnInit {
   public userForm: FormGroup;
   isNameSelected: boolean;
 
@@ -33,17 +34,16 @@ export class AddActivityComponent implements OnInit {
   downloadURL;
   activityID;
 
-  //Activity
-  activity: IActivities ={
+  submission: ISubmissions ={
+    aid: '',
+    comment: '',
+    datesubmit: '',
+    filesubmit: '',
     id: '',
-    title: '',
-    description: '',
-    category: '',
-    date: '',
-    file: '',
     uid: '',
-    tutorialdate: '',
+    
   }
+
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -56,27 +56,17 @@ export class AddActivityComponent implements OnInit {
     this.todaysDataTime = formatDate(this.today, 'yyyy-MM-dd HH:mm aa ', 'en-US');
     localStorage.setItem("activityDate", this.todaysDataTime);
    }
-  
+
   private basePath = '/files';
 
   ngOnInit(): void {
   }
 
-  selectInput(event) {
-    let selected = event.target.value;
-    if (selected == "Turorial") {
-      this.isNameSelected = true;
-    } else {
-      this.isNameSelected = false;
-    }
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
   }
 
   onSubmit(){
-    localStorage.setItem('activityTitle', this.activity.title)
-    localStorage.setItem('activityDescription', this.activity.description)
-    localStorage.setItem('activityCategory', this.activity.category)
-    localStorage.setItem('activityTutoDate', this.activity.tutorialdate)
-
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
@@ -93,23 +83,13 @@ export class AddActivityComponent implements OnInit {
         );
       }
     }
-    this.fireBaseService.addActivities(this.activity);
+    this.fireBaseService.addSubmissions(this.submission);
     // this.activityID = localStorage.getItem("activityID");
     // this.fireBaseService.updateActivities(this.activityID, this.activity);
     
-    this.activity.title = '';
-    this.activity.description = '';
-    this.activity.category = '';
-    this.activity.tutorialdate = '';
-    this.activity.id = '';
-    this.activity.file = '';
-    this.activity.date = '';
+    this.submission.filesubmit = '';
+    this.submission.datesubmit = '';
     this.router.navigate(['activity']); 
-  }
-
-  //File
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
   }
 
 }

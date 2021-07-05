@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" >
+     <div>
+         <td>
+             <mat-label>File</mat-label>
+             <br>
+             <input type="file" name="file" [(ngModel)]="submission.filesubmit" (change)="selectFile($event)">
+         </td>
+     </div>
+ 
+     <input type="hidden" name="date" [(ngModel)]="submission.datesubmit" value=todaysDataTime> 
+     
+   
+     <div class="example-button-row">
+         <br><button mat-raised-button color="primary" type="submit" [disabled]="!selectedFiles" >Add</button>
+     </div>
+ </form>
+ 

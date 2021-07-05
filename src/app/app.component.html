@@ -23,7 +23,7 @@
   
       <div class="example-button-row">
           <button mat-raised-button class="btn btn-success" (click)="onSignIn(email,password)" type="submit">Login</button>
-          Don't have an account? Sign up now! <button mat-raised-button class="btn btn-primary" (click)="handleSignUp()" type="submit">Register</button>
+          Don't have an account? Sign up now! <button mat-raised-button class="btn btn-primary" (click)="handleSignUp()" type="submit">Sign Up</button>
       </div>
     </form>
   </div>
@@ -58,8 +58,8 @@
                         </div>
                         <!-- <input type="hidden" name="id" [(ngModel)]="user.id" value={{userUID}}>  -->
                         <!-- <input type="submit" value="Submit" class="btn-success"> -->
-                        <div col><input type="submit"  class="btn btn-success" value="Register"> Already has an account?
-                          <button mat-raised-button class="btn btn-primary" (click)="handleSignIn()" type="submit">Sign In</button>
+                        <div col><input type="submit"  class="btn btn-primary" value="Register"> Already has an account?
+                          <button mat-raised-button class="btn btn-success" (click)="handleSignIn()" type="submit">Sign In</button>
                         </div>
                     </form>
                 </div>

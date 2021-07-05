@@ -22,10 +22,12 @@ export class ViewSubmissionComponent implements OnInit {
  constructor(
    private fb: FormBuilder,
    private modalService: NgbModal,
-   private fireBaseService: FireBaseService
+   private fireBaseService: FireBaseService,
+   private router: Router,
  ){}
  ngOnInit(): void{
    this.getActivities();
+   
  }
 
  getActivities(): void{
@@ -37,7 +39,14 @@ export class ViewSubmissionComponent implements OnInit {
        } as IActivities;
      });
    });
+   
  }
  
+ getActivity(activity: any){
+  //  this.fireBaseService.getActivity(activity)
+   localStorage.setItem('activityID', activity)
+   console.log(activity)
+   this.router.navigate(['/addSubmission']); 
+ }
 }
 

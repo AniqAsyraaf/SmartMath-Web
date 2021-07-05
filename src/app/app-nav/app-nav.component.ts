@@ -11,6 +11,7 @@ import {AngularFireAuth} from '@angular/fire/auth'
 import { error } from '@angular/compiler/src/util';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-nav',
@@ -21,9 +22,9 @@ export class AppNavComponent implements OnInit {
 
   
   title:String = "SmartMath";
-
   hide = true;
   isSignedIn = false;
+  userRole;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -39,18 +40,17 @@ export class AppNavComponent implements OnInit {
     private modalService: NgbModal,
     private fireBaseService: FireBaseService,
     public auth: AngularFireAuth,
-    private firestore: AngularFirestore) {}
+    private firestore: AngularFirestore,
+    private router: Router) {}
 
   ngOnInit() {
-  
+    this.userRole=localStorage.getItem('userRole')
   }
 
   logout(){
     this.fireBaseService.logout()
     this.isLogout.emit()
+    this.router.navigate(['/']);
   }
-
- 
-
 
 }

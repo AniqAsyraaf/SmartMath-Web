@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   userUID = localStorage.getItem("userUID");
   isSignedIn = false;
   public specuser;
+  condition;
 
   constructor(
     private fb: FormBuilder,

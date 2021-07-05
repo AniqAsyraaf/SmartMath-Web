@@ -11,6 +11,7 @@ import { AngularFireAuth} from '@angular/fire/auth'
 import { error } from '@angular/compiler/src/util';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit{
   hide = true;
   isSignedIn = false;
   isSignUp = false;
-  userUID = localStorage.getItem("users")
+  userID = localStorage.getItem("userUID")
+  userRole: string;
 
   user: IUsers = {
     id: '',
@@ -52,7 +54,8 @@ export class AppComponent implements OnInit{
     private modalService: NgbModal,
     private fireBaseService: FireBaseService,
     public auth: AngularFireAuth,
-    private firestore: AngularFirestore) {}
+    private firestore: AngularFirestore,
+    private router: Router,) {}
 
   ngOnInit() {
     if(localStorage.getItem('users')!==null)
@@ -63,11 +66,16 @@ export class AppComponent implements OnInit{
   }
 
   onSignIn(email: string, password: string){
+
     var userUID = this.fireBaseService.signIn(email, password)
-    console.log(userUID)
     if(this.fireBaseService.isLoggedIn)
     this.isSignedIn =true;
     
+    // this.fireBaseService.getUsername(this.userID).subscribe(
+    //   (data) => this.userRole = data.exists ? data.data().role : undefined
+    // )
+    localStorage.setItem("userRole", this.userRole)
+    this.router.navigate(['/']);
   }
 
   onRegister() {

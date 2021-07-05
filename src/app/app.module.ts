@@ -29,6 +29,7 @@ import { AddActivityComponent } from './components/add-activity/add-activity.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AddSubmissionComponent } from './components/add-submission/add-submission.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ChatroomComponent,
     ViewSubmissionComponent,
     AddActivityComponent,
+    AddSubmissionComponent,
   ],
   imports: [
     BrowserModule,
