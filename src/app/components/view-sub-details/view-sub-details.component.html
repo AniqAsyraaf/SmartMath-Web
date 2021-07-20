@@ -1,0 +1,44 @@
+<div *ngIf="!isSignedIn" class="container-fluid">
+    <div class="col-md-3" *ngFor="let activity of activityList">
+        <div *ngIf="activity.id==aID">
+            <div >
+            <!-- <div *ngFor="let submission of submissionList">
+                <div *ngIf="submission.uid==UID"> -->
+                    <table border="1px"><div class="heading"><b>Title: </b>{{activity.title}}</div>
+                        <tr>
+                            <td>Submission Status:  </td>
+                            <!-- <td *ngIf="submission.uid=='true'">Not submit yet</td> -->
+                            <td *ngIf="filesubmit!=null">Already submitted</td>
+                            <td *ngIf="filesubmit==null">Not submitted</td>
+                        </tr>
+                        <tr>
+                            <td>Time remaining:   </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Due date:   </td>
+                            <td>{{activity.tutorialdate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Modified:   </td>
+                            <td>{{datesubmit}}</td>
+                        </tr>
+                        <tr>
+                            <td>File Submission:   </td>
+                            <td *ngIf="filesubmit!=null"><a href="{{filesubmit}}">File</a></td>
+                            <td *ngIf="filesubmit==null"></td>
+                        </tr>
+                        <tr>
+                            <td>Comment</td>
+                            <td *ngIf="comment!=null">{{comment}}</td>
+                            <td *ngIf="comment==null">No comment</td>
+                        </tr>
+                    </table>
+
+                    <button (click)="getActivity(activity.id)">Add Submission</button>
+                <!-- </div>
+            </div> -->
+        </div>
+        </div>     
+    </div>
+</div>

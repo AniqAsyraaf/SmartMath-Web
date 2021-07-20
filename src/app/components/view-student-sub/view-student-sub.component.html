@@ -1,0 +1,23 @@
+<div *ngIf="!isSignedIn" class="container-fluid">
+    <div>
+        <div class="col-md-3" *ngFor="let user of userList">
+            <div class="card" *ngIf="user.role=='Student'">
+                <div  *ngFor="let submission of submissionList">
+                    <div *ngIf="submission.uid==user.id">
+                        <div class="table" *ngIf="submission.aid==aID">
+                            <!-- <div *ngIF="submission.comment!=null">
+                                <div class="heading"><a href="">{{user.name}}</a> Graded</div>
+                            </div> -->
+                            <div><b>{{user.name}}</b></div>
+                            <div><b>Status: </b> Submitted</div>
+                            <div><button (click)="addComment(submission.id, user.name)">View</button></div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <!-- <div *ngIf="user.role=='Student'">
+                <div class="heading"><a href="">{{user.name}}</a> Not Submitted</div>
+            </div> -->
+        </div>
+    </div>
+</div>

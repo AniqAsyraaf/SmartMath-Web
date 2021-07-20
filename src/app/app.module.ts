@@ -30,6 +30,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AddSubmissionComponent } from './components/add-submission/add-submission.component';
+import { ViewSubDetailsComponent } from './components/view-sub-details/view-sub-details.component';
+import { ViewStudentSubComponent } from './components/view-student-sub/view-student-sub.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import { AddSubmissionComponent } from './components/add-submission/add-submissi
     ViewSubmissionComponent,
     AddActivityComponent,
     AddSubmissionComponent,
+    ViewSubDetailsComponent,
+    ViewStudentSubComponent,
+    AddCommentComponent,
   ],
   imports: [
     BrowserModule,

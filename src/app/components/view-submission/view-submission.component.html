@@ -1,12 +1,27 @@
-<div *ngIf="!isSignedIn" class="container-fluid">
-    <div class="row" *ngIf="activityList.length">
+<div *ngIf="userRole=='Teacher'">.
+    <div *ngIf="!isSignedIn" class="container-fluid">
         <div class="col-md-3" *ngFor="let activity of activityList">
             <div class="card" *ngIf="activity.category=='Submission'" >
                 <div class="heading"><b>Title: </b>{{activity.title}}</div>
                 <div><b>Description</b></div>
                 <div class="sub-heading">{{activity.description}}</div>
-                <div class="sub-heading"><button (click)="getActivity(activity.id)">Submit</button></div>
+                <div class="sub-heading"><button (click)="getActivity(activity.id)">View</button></div>
                 <div class="sub-heading">{{activity.date}}</div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="userRole=='Student'">
+    <div *ngIf="!isSignedIn" class="container-fluid">
+        <div>
+            <div class="col-md-3" *ngFor="let activity of activityList">
+                <div class="card" *ngIf="activity.category=='Submission'">
+                    <div class="heading"><b>Title: </b>{{activity.title}}</div>
+                    <div><b>Description</b></div>
+                    <div class="sub-heading">{{activity.description}}</div>
+                    <div class="sub-heading"><button (click)="getSubDetail(activity.id)">View</button></div>
+                    <div class="sub-heading">{{activity.date}}</div> 
+                </div>
             </div>
         </div>
     </div>

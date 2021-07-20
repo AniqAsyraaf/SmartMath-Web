@@ -37,7 +37,7 @@ export class FireBaseService {
   cityRef: any;
   datesubmit;
   filesubmit;
-  comment = null;
+  comment ;
   activityID;
   id = null;
 
@@ -77,25 +77,16 @@ export class FireBaseService {
     )
   }
 
-  // NOT USED
-  // updateActivities(activityID: string, payload: IActivities) {
-  //   this.tempUID = localStorage.getItem('tempUID');
-  //   this.userID = JSON.parse(this.tempUID);
-  //   this.downloadURL = localStorage.getItem('downloadURL');
-  //   this.dateTime = localStorage.getItem('date');
-
-  //   this.firestore.doc('activity/' + activityID).update(
-  //     {
-  //       uid: this.userID,
-  //       date: this.dateTime,
-  //       file: this.downloadURL
-  //     }
-  //   );
-  // }
-
-  // deleteActivities(activityID: string) {
-  //   return this.firestore.doc('activity/' + activityID).delete();
-  // }
+  updateComment(submission: ISubmissions) {
+    this.firestore.collection('submission').doc(submission.id).set({
+      comment: submission.comment,
+      aid: submission.aid,
+      uid: submission.aid,
+      datesubmit: submission.datesubmit,
+      filesubmit: submission.filesubmit
+    });
+    window.alert("Update Successful")
+}
 
   //Submission
   getSubmissions() {
@@ -191,11 +182,13 @@ export class FireBaseService {
   }
 
   updateUser(user: IUsers) {
+      this.userUID = localStorage.getItem("userUID")
       this.firestore.collection('users').doc(user.id).set({
         login: user.login,
         name: user.name,
         password: user.password,
         role: user.role,
+        id: this.userUID
       });
       window.alert("Update Successful")
   }
@@ -246,6 +239,20 @@ export class FireBaseService {
       }).catch((error) => {
         console.log("Error getting document:", error);
       });
+    }
+
+  getSubmission(submission){
+    var docRef = this.firestore.collection('submission',ref => ref.where('uid','==', 'lGbBiTkgZHO1FOnmGynUBT8yQDn1'));
+    console.log(submission)
+    const subDetail = docRef.get()
+    subDetail.toPromise().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+      });
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
   }
 }
 

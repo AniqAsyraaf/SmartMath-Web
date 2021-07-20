@@ -1,0 +1,26 @@
+<div *ngIf="!isSignedIn" class="container-fluid">
+    <div>
+        <div class="col-md-3" *ngFor="let submission of submissionList">    
+            <div>
+                <div *ngIf="submission.id==sid"> 
+                    <div class="heading"><b>Title: </b>{{aTitle}}</div>
+                    <div class="heading"><b>Name: </b>{{userSubName}}</div>
+                    <div class="sub-heading"><button><a href="{{submission.filesubmit}}">View Submission</a></button></div>
+                    <br>
+
+                    
+                    <form (ngSubmit)="onSubmit(submission)">
+                        <input type="text" placeholder="Comment" name="comment" [(ngModel)]="submission.comment">
+                        <input type="hidden" class="form-control" value="{{submission.id}}" name="id" [(ngModel)]="submission.aid" disabled >
+                        <input type="hidden" class="form-control" value="{{submission.id}}" name="id" [(ngModel)]="submission.datesubmit" disabled >
+                        <input type="hidden" class="form-control" value="{{submission.id}}" name="id" [(ngModel)]="submission.filesubmit" disabled >
+                        <input type="hidden" class="form-control" value="{{submission.id}}" name="id" [(ngModel)]="submission.id" disabled >
+                        <input type="hidden" class="form-control" value="{{submission.id}}" name="id" [(ngModel)]="submission.uid" disabled >
+                        <div><button type="Submit">Save</button></div>
+                    </form>
+                
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
