@@ -46,11 +46,11 @@ export class FireBaseService {
     public auth: AngularFireAuth,
     private db: AngularFireDatabase,
     private storage: AngularFireStorage
-  ) {}
+  ) { }
 
 
   //Activity
-  getActivities(){
+  getActivities() {
     return this.firestore.collection('activity').snapshotChanges();
   }
 
@@ -59,7 +59,7 @@ export class FireBaseService {
     this.userID = JSON.parse(this.tempUID);
     this.downloadURL = localStorage.getItem('downloadURL');
     this.dateTime = localStorage.getItem('activityDate');
-    this.title= localStorage.getItem('activityTitle');
+    this.title = localStorage.getItem('activityTitle');
     this.description = localStorage.getItem('activityDescription');
     this.category = localStorage.getItem('activityCategory');
     this.tutoDate = localStorage.getItem('activityTutoDate');
@@ -76,7 +76,7 @@ export class FireBaseService {
       }
     )
   }
-  
+
   // NOT USED
   // updateActivities(activityID: string, payload: IActivities) {
   //   this.tempUID = localStorage.getItem('tempUID');
@@ -98,7 +98,7 @@ export class FireBaseService {
   // }
 
   //Submission
-  getSubmissions(){
+  getSubmissions() {
     return this.firestore.collection('submission').snapshotChanges();
   }
 
@@ -116,47 +116,45 @@ export class FireBaseService {
         filesubmit: this.filesubmit,
         id: this.id,
         uid: this.userID,
-       
+
       }
     )
   }
-  
+
   //Sign In, Sign Up & Sign Out
-  signIn(email: string, password: string){
+  signIn(email: string, password: string) {
     this.auth.signInWithEmailAndPassword(email, password)
-    .then(res =>
-    {
-      this.isLoggedIn = true
-      localStorage.setItem('users',JSON.stringify(res.user)) 
-      localStorage.setItem('tempUID',JSON.stringify(res.user?.uid))
-      this.tempUID = localStorage.getItem('tempUID')
-      this.userID = JSON.parse(this.tempUID);
-      localStorage.setItem('userUID', this.userID)
-    }) 
+      .then(res => {
+        this.isLoggedIn = true
+        localStorage.setItem('users', JSON.stringify(res.user))
+        localStorage.setItem('tempUID', JSON.stringify(res.user?.uid))
+        this.tempUID = localStorage.getItem('tempUID')
+        this.userID = JSON.parse(this.tempUID);
+        localStorage.setItem('userUID', this.userID)
+      })
 
     this.userUID = localStorage.getItem('userUID')
     var docRef = this.firestore.collection('users').doc(this.userID);
     console.log(this.userUID)
     docRef.get()
-    .toPromise().then((doc) => {
+      .toPromise().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
-            var tempRole = doc.get("role");
-            console.log(tempRole);
-            localStorage.setItem('userRole', tempRole)
+          console.log("Document data:", doc.data());
+          var tempRole = doc.get("role");
+          console.log(tempRole);
+          localStorage.setItem('userRole', tempRole)
         } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
         }
-    }).catch((error) => {
+      }).catch((error) => {
         console.log("Error getting document:", error);
-    });
+      });
   }
 
   addUsers(user: IUsers) {
     this.auth.createUserWithEmailAndPassword(user.login, user.password)
-      .then(res => 
-      {
+      .then(res => {
         this.isLoggedIn = true
         localStorage.setItem('users', JSON.stringify(res.user))
         localStorage.setItem('tempUID', JSON.stringify(res.user?.uid))
@@ -174,22 +172,32 @@ export class FireBaseService {
           password: this.userPassword,
           role: this.userRole
         });
-        window.alert("Register Sucessful")
+        window.alert("Register Successful")
       });
   }
-  
+
   logout() {
     this.auth.signOut()
     localStorage.clear()
     // localStorage.removeItem('users')
   }
 
-  getUsers(){
+  getUsers() {
     return this.firestore.collection('users').snapshotChanges();
   }
 
-  getUsername(uid : string) {
+  getUsername(uid: string) {
     return (this.firestore.doc(`users/${uid}`).get())
+  }
+
+  updateUser(user: IUsers) {
+      this.firestore.collection('users').doc(user.id).set({
+        login: user.login,
+        name: user.name,
+        password: user.password,
+        role: user.role,
+      });
+      window.alert("Update Successful")
   }
 
   //Files
@@ -221,35 +229,35 @@ export class FireBaseService {
       ref.limitToLast(numberItems));
   }
 
-  getActivity(activity){
+  getActivity(activity) {
     var docRef = this.firestore.collection('activty').doc(activity);
     console.log(activity)
     docRef.get()
-    .toPromise().then((doc) => {
+      .toPromise().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
-            // var tempRole = doc.get("id");
-            // console.log(tempRole);
-            // localStorage.setItem('tempAID', tempRole)
+          console.log("Document data:", doc.data());
+          // var tempRole = doc.get("id");
+          // console.log(tempRole);
+          // localStorage.setItem('tempAID', tempRole)
         } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
         }
-    }).catch((error) => {
+      }).catch((error) => {
         console.log("Error getting document:", error);
-    });
+      });
   }
 }
 
 export interface IUsers {
-  id:string;
+  id: string;
   login: string;
   name: string;
   password: string;
   role: string;
 }
 
-export interface IActivities{
+export interface IActivities {
   id: string;
   category: string;
   date: string;
@@ -260,7 +268,7 @@ export interface IActivities{
   uid: string;
 }
 
-export interface ISubmissions{
+export interface ISubmissions {
   aid: string;
   comment: string;
   datesubmit: string;

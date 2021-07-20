@@ -14,7 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class ProfileComponent implements OnInit {
   public userList: IUsers[] = [];
-  currUser: IUsers;
+  user: IUsers;
   userUID = localStorage.getItem("userUID");
   isSignedIn = false;
   public specuser;
@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.getUsers();
-    // currUser = localStorage.getItem('users');
   }
 
   getUsers(): void {
@@ -42,6 +41,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  updateUser(user: IUsers){
+    this.fireBaseService.updateUser(user);
+  }
+
   // getSpecificUser(){
   //   this.db.collection('users').doc('UnPwZ6StA1MzOOyWhkBmSEAKrQG2').snapshotChanges().subscribe(res => {
   //     this.userList = res.map((user) => {
@@ -51,6 +54,6 @@ export class ProfileComponent implements OnInit {
   //       } as IUsers;
   //     });
   // }
-  
-  
+
+
 }

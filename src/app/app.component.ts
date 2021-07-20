@@ -97,6 +97,9 @@ export class AppComponent implements OnInit{
       this.user.password = '';
       //this.user.confirmPassword = '';
     }
+    else{
+      window.alert("Please fill in all details")
+    }
   }
 
   handleLogout(){
